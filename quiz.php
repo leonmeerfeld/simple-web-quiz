@@ -18,19 +18,47 @@
   	</div>
   	<div class="main">
       <!--
-      min-width: 600px
+      width: 800px
       height: 700px
       -->
-
       <div class="quiz-header">
         <h1>This is a quiz!</h1>
       </div>
       <div class="quiz-content">
-        <a>bu</a>
+        <!--
+      width: 800px
+      height: 600px
+      -->
+
+        <div class="question-block">
+          <a>This is a Question. This is a Question. This is a Question. This is a Question. This is a Question. This is a Question. This is a Question. This is a Question. This is a Question. This is a Question.</a>
+        </div>
+        <div class="lower-block">
+          <div class="image-block">
+            <img class="image" src="/content/thisisanimage.png">
+          </div>
+          <div class="answer-block">
+            <div class="answer1">
+              <div class="answer1-button"><a>A</a></div>
+            </div>
+            <div class="answer2">
+              <div class="answer2-button"><a>B</a></div>
+            </div>
+            <div class="answer3">
+              <div class="answer3-button"><a>C</a></div>
+            </div>
+            <div class="answer4">
+              <div class="answer4-button"><a>D</a></div>
+            </div>
+            <div class="answer5">
+              <div class="answer5-button"><a>E</a></div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="quiz-cover">
-        <div class="start-button">
-          <h2 onclick="hideCover()">START</h2>
+        <div onclick="hideCover()" class="start-button">
+          <h2>START</h2>
         </div>
       </div>
   	</div>
