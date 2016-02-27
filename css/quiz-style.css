@@ -71,6 +71,7 @@ html, body
 	background-color: #FFC900;
 
 	border: 2px outset #F2BD00;
+	border-radius: 20px;
 }
 
 .lower-block {

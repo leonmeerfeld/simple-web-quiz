@@ -1,6 +1,16 @@
 <?php 
+  //Read quiz file:
+  $filename = "/var/www/quizzes/This-is-the-quiz-name.quiz";
+  $handle = fopen($filename, "r");
+  $contents = fread($handle, filesize($filename));
+  fclose($handle);
 
+  $quiz_array = explode(";", $contents);
 
+  $question_str = substr($quiz_array[0], 9);
+
+  $answer_str = substr($quiz_array[1], 10);
+  $answer_array = explode(",", $answer_str);
 
 ?>
 
@@ -37,7 +47,11 @@
       -->
 
         <div class="question-block">
-          <a>This is a Question. This is a Question. This is a Question. This is a Question. This is a Question. This is a Question. This is a Question. This is a Question. This is a Question. This is a Question.</a>
+          <a>
+            <?php
+              echo $question_str;
+            ?>
+          </a>
         </div>
         <div class="lower-block">
           <div class="image-block">
@@ -46,23 +60,43 @@
           <div class="answer-block">
             <div class="answer1">
               <div class="answer1-button"><a>A</a></div>
-              <a>This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer.</a>
+              <a>
+                <?php
+                  echo $answer_array[0];
+                ?>
+              </a>
             </div>
             <div class="answer2">
               <div class="answer2-button"><a>B</a></div>
-              <a>This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer.</a>
+              <a>
+                <?php
+                  echo $answer_array[1];
+                ?>
+              </a>
             </div>
             <div class="answer3">
               <div class="answer3-button"><a>C</a></div>
-              <a>This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer.</a>
+              <a>
+                <?php
+                  echo $answer_array[2];
+                ?>
+              </a>
             </div>
             <div class="answer4">
               <div class="answer4-button"><a>D</a></div>
-              <a>This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer.</a>
+              <a>
+                <?php
+                  echo $answer_array[3];
+                ?>
+              </a>
             </div>
             <div class="answer5">
               <div class="answer5-button"><a>E</a></div>
-              <a>This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer. This is a possible answer.</a>
+              <a>
+                <?php
+                  echo $answer_array[4];
+                ?>
+              </a>
             </div>
           </div>
         </div>
