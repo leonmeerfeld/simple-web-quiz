@@ -1,8 +1,12 @@
 <?php 
   //Read quiz file:
-  $filename = "/var/www/quizzes/This-is-the-quiz-name.quiz";
-  $handle = fopen($filename, "r");
-  $contents = fread($handle, filesize($filename));
+  //$filename = "/var/www/quizzes/This-is-the-quiz-name.quiz";
+  $file_name = $_GET["quiz"];
+  
+  $file_path = "/var/www/quizzes/" . $file_name . ".quiz";
+
+  $handle = fopen($file_path, "r");
+  $contents = fread($handle, filesize($file_path));
   fclose($handle);
 
   $quiz_array = explode(";", $contents);
@@ -11,7 +15,6 @@
 
   $answer_str = substr($quiz_array[1], 10);
   $answer_array = explode(",", $answer_str);
-
 ?>
 
 <!DOCTYPE php>
@@ -22,7 +25,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Simple Web Quiz</title>
+    <title>
+      <?php
+       echo $file_name;
+      ?>
+      Simple Web Quiz
+    </title>
+
     <script>
       function hideCover() {
         document.getElementsByClassName('quiz-cover')[0].style.visibility='hidden'; 
@@ -38,7 +47,11 @@
       height: 700px
       -->
       <div class="quiz-header">
-        <h1>This is a quiz!</h1>
+        <h1>
+          <?php 
+            echo $file_name;
+          ?>
+        </h1>
       </div>
       <div class="quiz-content">
         <!--
