@@ -16,7 +16,7 @@
   //Gets the infos form the .quiz file.
   $file_path = "/var/www/quizzes/" . $file_name . ".quiz";
 
-  //opens file from direct path.
+  //Opens file from direct path.
   $handle = fopen($file_path, "r");
   $contents = fread($handle, filesize($file_path));
   fclose($handle);
@@ -25,15 +25,33 @@
 
   $number_of_questions = (count($quiz_array) - 1)/2;
 
-  //The question string from the file.
-  //$question_str = substr($quiz_array[0], 9);
+  //This part controls which answer 'page' will be shown.
+  //If $parameter_split exists and is not "", game is on.
+  if(isset($parameter_split[1]))
+  {
+    //if()
+    $answer_page = $parameter_split[1];
+  }else
+  {
+    $answer_page = 0;
+  }
 
-  $answer_page = $parameter_split[1];
+  //Answers the user submits will be fetched here
+  //if(isset($parameter_split[2]))
+  //{
+  //  $submitted_answers = array(1 => , $parameter_split[2]);
+  //}
+
+  $question = substr($quiz_array[$answer_page], 9);
+
   $answers = substr($quiz_array[$answer_page + $number_of_questions], 11);
   $answer_array = explode(",", $answers);
 
-  //string for the start button link
-  $start_button_link ="/quiz.php/?quiz=".$file_name."/0";
+  //String for the start button link
+  $start_button_link = "/quiz.php/?quiz=".$file_name."/".$answer_page;
+
+  //String for the answer buttons link
+  $answer_button_link = "/quiz.php/?quiz=".$file_name."/".$answer_page;
 
   //If the second parameter is 's' the quiz-cover gets removed.
   if(isset($parameter_split[1]))
@@ -41,7 +59,7 @@
     $hide_cover_string = "style='visibility:hidden;'";
   }else
   {
-    $hide_cover_string = "";
+    $hide_cover_string = null;
   }
 ?>
 
@@ -61,9 +79,6 @@
     </title>
 
     <script>
-      <!--function hideCover() {
-        document.getElementsByClassName('quiz-cover')[0].style.visibility='hidden'; 
-      }-->
     </script>
   </head>
   <body>
@@ -90,7 +105,7 @@
         <div class="question-block">
           <a>
             <?php
-              echo $question_str;
+              echo $question;
             ?>
           </a>
         </div>
@@ -99,44 +114,55 @@
             <img class="image" src="/content/thisisanimage.png">
           </div>
           <div class="answer-block">
-              <div class="answer1">
-                <div class="answer1-button"><a>A</a></div>
-                  <a>
+            <a href="<?php echo $answer_button_link ?>">
+                <div class="answer1">
+                  <div class="answer1-button"><p>A</p></div>
+                  <p>
                     <?php
                       echo $answer_array[0];
                     ?>
-                  </a>
-              </div>
-            <div class="answer2">
-              <div class="answer2-button"><a>B</a></div>
-              <a>
-                <?php
-                  echo $answer_array[1];
-                ?>
+                  </p>
+                </div>
               </a>
-            </div>
-            <div class="answer3">
-              <div class="answer3-button"><a>C</a></div>
-              <a>
-                <?php
-                  echo $answer_array[2];
-                ?>
+              <a href="<?php echo $answer_button_link ?>">
+                <div class="answer2">
+                  <div class="answer2-button"><p>B</p></div>
+                  <p>
+                    <?php
+                      echo $answer_array[1];
+                    ?>
+                  </p>
+                </div>
               </a>
-            </div>
-            <div class="answer4">
-              <div class="answer4-button"><a>D</a></div>
-              <a>
-                <?php
-                  echo $answer_array[3];
-                ?>
+              <a href="<?php echo $answer_button_link ?>">
+                <div class="answer3">
+                  <div class="answer3-button"><p>C</p></div>
+                  <p>
+                    <?php
+                      echo $answer_array[2];
+                    ?>
+                  </p>
+                </div>
               </a>
-            </div>
-            <div class="answer5">
-              <div class="answer5-button"><a>E</a></div>
-              <a>
-                <?php
-                  echo $answer_array[4];
-                ?>
+              <a href="<?php echo $answer_button_link ?>">
+                <div class="answer4">
+                  <div class="answer4-button"><p>D</p></div>
+                  <p>
+                    <?php
+                      echo $answer_array[3];
+                    ?>
+                  </p>
+                </div>
+              </a>
+              <a href="<?php echo $answer_button_link ?>">
+                <div class="answer5">
+                  <div class="answer5-button"><p>E</p></div>
+                  <p>
+                    <?php
+                      echo $answer_array[4];
+                    ?>
+                  </p>
+                </div>
               </a>
             </div>
           </div>
